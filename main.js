@@ -70,6 +70,17 @@ let display = document.getElementById('display').innerHTML;
     document.getElementById('display').innerHTML = display;
   }
 
+    //AC
+    function pushC(){
+      if(display == 'Error' || display.length == 1){//エラー、１文字だったら
+        display = '0';
+      }else{
+        display = display.slice(0,-1);
+      }
+      document.getElementById('display').innerHTML = display;
+    }
+  
+
   //AC
   function pushAC(){
     display = '0';
@@ -77,7 +88,7 @@ let display = document.getElementById('display').innerHTML;
   }
 
   //結果
-  function pushEqual(){
+  function pushEquals(){
     if(display == 'Error'){//エラーだったら
       return display;
     }
