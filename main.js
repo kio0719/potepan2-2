@@ -5,7 +5,9 @@ let display = document.getElementById('display').innerHTML;
 
   //数字
   function pushNum(num){
-    if(display == 0 && display.slice(-1) == '.'){//式に小数点が入っていたら
+    if(display == 'Error'){//エラーだったら
+      return display;
+    }else if(display == 0 && display.slice(-1) == '.'){//式に小数点が入っていたら
       display += num;
     }else if(display == 0){//式に何も入ってなかったら
       display = num;
@@ -14,26 +16,28 @@ let display = document.getElementById('display').innerHTML;
     }else{
       display += num;
     }
-    console.log(display);
     document.getElementById('display').innerHTML = display;
   }
 
   //ゼロ
   function pushZero(zero){
-    if(display == 0){//式に何も入ってなかったら
+    if(display == 'Error'){//エラーだったら
+      return display;
+    }else if(display == 0){//式に何も入ってなかったら
       display = '0';
     }else if(/[\+\-\÷\×]/.test(display.slice(-1))){//式の末尾が演算子だったら
       display += 0;
     }else{
       display += zero;
     }
-    console.log(display);
     document.getElementById('display').innerHTML = display;
   }
 
   //演算子
   function pushOpe(ope){
-    if(/[\+\-\×\÷]/.test(display.slice(-1))){ //式の末尾に演算子があったら
+    if(display == 'Error'){//エラーだったら
+      return display;
+    }else if(/[\+\-\×\÷]/.test(display.slice(-1))){ //式の末尾に演算子があったら
       display = display.slice(0,-1) + ope;
     }
     else if(display.slice(-1) == '.'){ //式の末尾が小数点だったら
@@ -42,13 +46,14 @@ let display = document.getElementById('display').innerHTML;
     else{
       display += ope;
     }
-    console.log(display);
     document.getElementById('display').innerHTML = display;
   }
 
   //小数点
   function pushPoint(){
-    if(display == 0){//式に何も入ってなかったら
+    if(display == 'Error'){//エラーだったら
+      return display;
+    }else if(display == 0){//式に何も入ってなかったら
       display = '0.';
     }else if(/[\+\-\×\÷]/.test(display.slice(-1))){//式の末尾が演算子だったら
       display += '0.';
@@ -62,22 +67,25 @@ let display = document.getElementById('display').innerHTML;
     else{//式の末尾が数字
       display += '.';
     }
-    console.log(display);
     document.getElementById('display').innerHTML = display;
   }
 
   //AC
   function pushAC(){
     display = '0';
-    console.log(display);
     document.getElementById('display').innerHTML = display;
   }
 
   //結果
   function pushEqual(){
+    if(display == 'Error'){//エラーだったら
+      return display;
+    }
     display = display.replace(/×/g,'*');
     display = display.replace(/÷/g,'/');
     display = Function('return ('+display+');')().toString();
-    console.log(display);
+    if(display == 'NaN' || display == Infinity){
+      display = 'Error';
+    }
     document.getElementById('display').innerHTML = display;
   }
