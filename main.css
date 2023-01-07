@@ -1,0 +1,34 @@
+.calculator{
+  width:430px;
+  padding:20px 40px;
+  background-color:#B5FF14;
+  border-color:#FFF;
+  border-radius:20px;
+}
+#display{
+  width:100%;
+  height:70px;
+  background-color:#000;
+  margin-bottom:20px;
+  color:#FFF;
+  text-align:right;
+  font-size:2.5rem;
+  border-radius:10px;
+  overflow:scroll;
+}
+.line{
+  display:flex;
+  justify-content: space-between;
+  width:100%;
+  height:50px;
+  margin-bottom:10px;
+}
+.line button{
+  width:78px;
+  border-radius:10px;
+  font-size:1.5rem;
+}
+.last button{
+  width:45%;
+  font-size:1.5rem;
+}
